@@ -12,16 +12,15 @@
 // <summary></summary>
 // ***********************************************************************
 #pragma once
-#include	"IConsoleContext.h"
-
+#include "IConsoleContext.h"
 namespace ConsoleApplicationLayer
 {
 
-	class ConsoleContext : public IConsoleContext
+class ConsoleContext : public IConsoleContext
 	{
 	public:
 		ConsoleContext() = delete;
-		ConsoleContext(int rows, int cols);
+		ConsoleContext(Icell celltype_);
 		BOOL InitWindow();
 		BOOL ReadInput();
 		BOOL ProcessMouseInput();
@@ -31,15 +30,15 @@ namespace ConsoleApplicationLayer
 		ConsoleContext& operator=(const ConsoleContext& rhs) = delete;
 		BOOL Draw() override;
 		void Purge();
+	private:
+		Icell cell_;
 	};
 
-	inline ConsoleContext::ConsoleContext(int rows_, int cols_) : IConsoleContext{ ConInfoStruct() }
-	{
-		CommStruct.rows = rows_;
-		CommStruct.cols = cols_;
+ ConsoleContext<Icell>::ConsoleContext(Icell celltype_) : IConsoleContext{ ConInfoStruct(); }
+	{		
 		InitWindow();
 	}
-	inline BOOL ConsoleContext::InitWindow()
+	 BOOL ConsoleContext::InitWindow()
 	{
 		CommStruct.Hin = GetStdHandle(STD_INPUT_HANDLE);
 		CommStruct.Hout = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -53,7 +52,7 @@ namespace ConsoleApplicationLayer
 
 		return returnVal;
 	}
-	inline BOOL ConsoleContext::ProcessMouseInput()
+	 BOOL ConsoleContext::ProcessMouseInput()
 	{
 		CommStruct.ConCursor = CommStruct.
 			inputRecords[CommStruct.numberOfRecordsRead]
@@ -63,17 +62,17 @@ namespace ConsoleApplicationLayer
 		return returnVal;
 	}
 
-	inline BOOL ConsoleContext::Update()
+	 BOOL ConsoleContext::Update()
 	{
 		return returnVal;
 	}
 
-	inline ConInfoStruct& ConsoleContext::GetCommonStruct()
+	 ConInfoStruct& ConsoleContext::GetCommonStruct()
 	{
 		return CommStruct;
 	}
 
-inline BOOL ConsoleContext::ReadInput()
+ BOOL ConsoleContext::ReadInput()
 	{
 		SetConsoleMode(CommStruct.Hin, CommStruct.newConsoleMode);
 		ReadConsoleInput(CommStruct.Hin
@@ -115,7 +114,7 @@ inline BOOL ConsoleContext::ReadInput()
 		return returnVal; // TODO: Finish ReadInput()
 	}
 
-	inline BOOL ConsoleContext::ProcessKeyInput()
+	 BOOL ConsoleContext::ProcessKeyInput()
 	{
 		if (CommStruct.inputRecords[CommStruct.numberOfRecordsRead]
 			.Event.KeyEvent.uChar.AsciiChar == QUIT)
@@ -137,10 +136,10 @@ inline BOOL ConsoleContext::ReadInput()
 		return returnVal;
 	}
 
-	inline BOOL ConsoleContext::Draw()
+	 BOOL ConsoleContext::Draw()
 	{		
 		return returnVal;
 	}
 
-	inline void ConsoleContext::Purge()	{	}
+	 void ConsoleContext::Purge()	{	}
 }

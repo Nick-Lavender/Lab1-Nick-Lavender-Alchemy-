@@ -23,7 +23,9 @@ using std::left;
 using std::right;
 using std::setw;
 using std::setprecision;
-#include	"ConInfoStruct.h"
+#include "Icell.h"
+#include "ConInfoStruct.h"
+
 
 namespace ConsoleApplicationLayer
 {
@@ -44,10 +46,10 @@ namespace ConsoleApplicationLayer
 		INFO_BANNER = 0x80
 	}*PCONFLAGS, CONFLAGS;
 
-	class IConsoleContext
+	class IConsoleContext : Icell
 	{
 	public:
-		IConsoleContext(ConInfoStruct &&struct_) : FLAGS(0), CommStruct(struct_) {}
+		IConsoleContext(ConInfoStruct &struct_) : Icell(), FLAGS(0), CommStruct(struct_) {}
 		ConInfoStruct& GetInfoStruct()
 		{
 			return CommStruct;

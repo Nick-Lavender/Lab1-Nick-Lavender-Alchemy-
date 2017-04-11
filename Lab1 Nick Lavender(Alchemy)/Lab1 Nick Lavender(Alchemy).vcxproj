@@ -29,6 +29,7 @@
     <ClInclude Include="Context.h" />
     <ClInclude Include="Decorator.h" />
     <ClInclude Include="Exception.h" />
+    <ClInclude Include="Icell.h" />
     <ClInclude Include="IConsoleContext.h" />
     <ClInclude Include="Row.h" />
   </ItemGroup>

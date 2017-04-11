@@ -19,6 +19,8 @@ using std::endl;
 #include <Windows.h>
 #include <crtdbg.h> 
 
+#include "Icell.h"
+
 #include	"Context.h"
 #include	"Alchemy.h"
 
@@ -28,7 +30,7 @@ int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	ConsoleContext console = ConsoleContext(9, 9);
+	ConsoleContext console = ConsoleContext(Cell({ 0, 0, 6, 3 }));
 
 	Alchemy alchemy = Alchemy(console);
 

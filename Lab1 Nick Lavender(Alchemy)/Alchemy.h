@@ -1,6 +1,6 @@
 #pragma once
 #include"Decorator.h"
-#include"Cell.h"
+#include "Cell.h"
 #include"Array2D.h"
 
 namespace ConsoleApplicationLayer
@@ -8,19 +8,20 @@ namespace ConsoleApplicationLayer
 
 	struct Alchemy : Decorator
 	{
-		Alchemy(IConsoleContext &inner);
+		Alchemy(IConsoleContext &inner, SHORT rows_, SHORT cols_);
 
 
 		~Alchemy() {}
 		BOOL Draw()override;
 
 	private:
-		Array2D<Cell> cellarray = Array2D<Cell>(common_struct.rows, common_struct.cols);
+		Array2D<Cell> cellarray; 
 		bool act = true;
 	};
 
-	inline Alchemy::Alchemy(IConsoleContext &inner) : Decorator{ inner }
+	inline Alchemy::Alchemy(IConsoleContext &inner, SHORT rows_, SHORT cols_) : Decorator{ inner }
 	{
+		cellarray = Array2D<Cell>(rows_, cols_);
 		common_struct.cell.Left = 0;
 		common_struct.cell.Right = 6;
 		common_struct.cell.Top = 0;

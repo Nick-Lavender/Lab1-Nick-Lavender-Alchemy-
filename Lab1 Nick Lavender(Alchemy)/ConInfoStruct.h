@@ -15,7 +15,7 @@
 #include <Windows.h>
 #include <stdio.h>
 #include "ConClientExcept.h"
-#include "Cell.h"
+#include "Icell.h"
 
 
 namespace ConsoleApplicationLayer
@@ -32,7 +32,7 @@ namespace ConsoleApplicationLayer
 		void Purge();
 		int rows;
 		int cols;
-		Cell cell;
+		Icell cell;
 		HWND Hwnd;
 		HANDLE Hin;
 		HANDLE Hout;
@@ -59,19 +59,20 @@ namespace ConsoleApplicationLayer
 	};
 
 	inline ConInfoStruct::ConInfoStruct()
-		: rows(0)
-		, cols(0)
-		, Hwnd(nullptr)
-		, Hin(nullptr)
-		, Hout(nullptr)
-		, Hwndnew(nullptr)
-		, HnewIn(nullptr)
-		, HnewOUT(nullptr)
-		, oldConsoleMode()
-		, numberOfRecordsRead()
-		, excep_error(nullptr)
-		, ContextMenuConsoleMode()
-		, ContextMenuConsoleModeOld() { }
+	: rows(0)
+	  , cols(0)
+	  , cell{}
+	  , Hwnd(nullptr)
+	  , Hin(nullptr)
+	  , Hout(nullptr)
+	  , Hwndnew(nullptr)
+	  , HnewIn(nullptr)
+	  , HnewOUT(nullptr)
+	  , oldConsoleMode()
+	  , numberOfRecordsRead()
+	  , excep_error(nullptr)
+	  , ContextMenuConsoleMode()
+	  , ContextMenuConsoleModeOld() { }
 	inline ConInfoStruct::ConInfoStruct(const ConInfoStruct &obj)
 		: rows(obj.rows)
 		, cols(obj.cols)
